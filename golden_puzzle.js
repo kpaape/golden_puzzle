@@ -1,4 +1,6 @@
-var boxes = ["!this", "!this", 0];
+// feel free to play with the 2 var below, doing so will change the puzzle entirely
+
+var boxes = ["!this", "!this", 0];	// index 2 (box 3) refers to box 1 (index 0) the testing is aware of this
 var reqTF = [1, 2];	// this puzzle requires one true and two false
 
 function checkPossibilities(arr) {
@@ -10,7 +12,7 @@ function checkPossibilities(arr) {
 			if(i === j) {	// this is when we assume the gold is in the current tested box
 				if(arr[i] === "!this"){	// if the current index is being tested as the one with gold but is labeled as not having it, it is a lie
 					numFalse++;
-				} else {
+				} else {	// if testing the one that should have gold see if it directs it to itself (so you can play around with the puzzle)
 					if(arr[j] === i) {
 						numTrue++;
 					} else {
@@ -18,7 +20,7 @@ function checkPossibilities(arr) {
 					}
 				}
 			} else {
-				if(arr[j] === "!this"){
+				if(arr[j] === "!this"){	// same as before but now you are testing the boxes that shouldn't have the gold
 					numTrue++;
 				} else {
 					if(arr[j] === i) {
@@ -28,14 +30,15 @@ function checkPossibilities(arr) {
 					}
 				}
 			}
-			alert("i: " + i + " j: " + j + " numTrue: " + numTrue + " numFalse: " + numFalse);
 		}
 		console.log("i: " + i + " j: " + j + " numTrue: " + numTrue + " numFalse: " + numFalse);
 		if(numTrue === reqTF[0] && numFalse === reqTF[1]) {
-			msg += "The gold can be in box " + (i + 1);
+			msg += "The gold can be in box " + (i + 1);	// log the possible outcomes that match all requirements
 		}
 	}
 	alert(msg);
 }
 
 checkPossibilities(boxes);
+
+	// feel free to ask questions
