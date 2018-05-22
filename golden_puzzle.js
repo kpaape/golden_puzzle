@@ -3,8 +3,18 @@
 var boxes = ["!this", "!this", 0];	// index 2 (box 3) refers to box 1 (index 0) the testing is aware of this
 var reqTF = [1, 2];	// this puzzle requires one true and two false
 
+function checkData() {	// if you customize the puzzle, do it right
+	if(boxes.length != reqTF[0] + reqTF[1]) {
+		alert("The total number of t/f must match the number of boxes.");
+		return true;
+	}
+}
+
 function checkPossibilities(arr) {
 	var msg = "";
+	if(checkData()) {
+		return;
+	}
 	for(var i = 0; i < arr.length; i++) {	// i is the index we are assuming has gold
 		var numTrue = 0;
 		var numFalse = 0;
@@ -33,12 +43,15 @@ function checkPossibilities(arr) {
 		}
 		console.log("i: " + i + " j: " + j + " numTrue: " + numTrue + " numFalse: " + numFalse);
 		if(numTrue === reqTF[0] && numFalse === reqTF[1]) {
-			msg += "The gold can be in box " + (i + 1);	// log the possible outcomes that match all requirements
+			msg += "The gold can be in box " + (i + 1) + " ";	// log the possible outcomes that match all requirements
 		}
+	}
+	if(msg === "") {
+		msg = "None of the possibilities matched the required t/f.";	// added this so if you play with the variables, it'll let you know when it doesn't add up
 	}
 	alert(msg);
 }
 
 checkPossibilities(boxes);
 
-	// feel free to ask questions
+// feel free to ask questions
